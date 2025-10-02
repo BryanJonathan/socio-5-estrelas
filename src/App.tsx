@@ -7,8 +7,10 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 import { ROUTES } from "./utils/consts";
-import PrivateRoute from "./pages/PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute";
+import PrivateLayout from "./components/PrivateLayout";
 
 const queryClient = new QueryClient();
 
@@ -19,13 +21,17 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* PUBLICAS */}
           <Route path={ROUTES.HOME} element={<Index />} />
           <Route path={ROUTES.LOGIN} element={<Login />} />
           <Route path={ROUTES.REGISTER} element={<SignUp />} />
           <Route path={ROUTES.NOTFOUND} element={<NotFound />} />
 
+          {/* PRIVADAS */}
           <Route element={<PrivateRoute />}>
-            <Route path={ROUTES.PROFILE} element={<>asd</>} />
+            <Route element={<PrivateLayout />}>
+              <Route path={ROUTES.PANEL} element={<Profile />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

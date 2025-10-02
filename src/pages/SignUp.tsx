@@ -63,7 +63,7 @@ const SignUp = () => {
     const isValidToken = isTokenValid(token);
     console.log(isValidToken);
     if (isValidToken) {
-      return <Navigate to={ROUTES.PROFILE} replace />;
+      return <Navigate to={ROUTES.PANEL} replace />;
     } else {
       logout();
     }
@@ -73,7 +73,7 @@ const SignUp = () => {
     setIsLoading(true);
     try {
       await registerUser(data.name, data.email, data.password);
-      navigate(ROUTES.PROFILE);
+      navigate(ROUTES.PANEL);
     } catch (error) {
       console.error("Sign up error:", error);
     } finally {

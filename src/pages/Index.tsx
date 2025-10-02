@@ -33,7 +33,7 @@ const Index = () => {
             {user ? (
               <>
                 <Button asChild>
-                  <Link to={ROUTES.PROFILE}>Meu perfil</Link>
+                  <Link to={ROUTES.PANEL}>Meu perfil</Link>
                 </Button>
                 <Button variant="link" onClick={handleLogout}>
                   Sair

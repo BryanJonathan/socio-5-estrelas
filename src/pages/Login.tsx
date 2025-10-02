@@ -52,7 +52,7 @@ const Login = () => {
     const isValidToken = isTokenValid(token);
     console.log(isValidToken);
     if (isValidToken) {
-      return <Navigate to={ROUTES.PROFILE} replace />;
+      return <Navigate to={ROUTES.PANEL} replace />;
     } else {
       logout();
     }
@@ -131,7 +131,7 @@ const Login = () => {
                     to="/forgot-password"
                     className="text-sm text-primary hover:underline font-medium"
                   >
-                    Esqueceu?
+                    Esqueceu a senha?
                   </Link>
                 </div>
                 <div className="relative">

@@ -1,8 +1,16 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Star, Trophy, Users, Heart, Shield, Ticket } from "lucide-react";
+import { Star, Trophy, Users, Heart, Ticket } from "lucide-react";
+import { ROUTES } from "@/utils/consts";
+import { useAuthStore } from "@/stores/authStore";
 
 const Index = () => {
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <div className="min-h-screen gradient-bg">
       {/* Header */}
@@ -13,17 +21,34 @@ const Index = () => {
               <Star className="h-7 w-7 text-primary-foreground fill-primary-foreground" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold leading-tight">Sócio Torcedor</span>
-              <span className="text-sm text-primary font-semibold leading-tight">Cruzeiro</span>
+              <span className="text-xl font-bold leading-tight">
+                Sócio Torcedor
+              </span>
+              <span className="text-sm text-primary font-semibold leading-tight">
+                Cruzeiro
+              </span>
             </div>
           </div>
           <div className="flex items-center space-x-3">
-            <Button variant="ghost" asChild>
-              <Link to="/login">Sign in</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/signup">Get started</Link>
-            </Button>
+            {user ? (
+              <>
+                <Button asChild>
+                  <Link to={ROUTES.PROFILE}>Meu perfil</Link>
+                </Button>
+                <Button variant="link" onClick={handleLogout}>
+                  Sair
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="ghost" asChild>
+                  <Link to={ROUTES.LOGIN}>Login</Link>
+                </Button>
+                <Button asChild>
+                  <Link to={ROUTES.REGISTER}>Se inscreva</Link>
+                </Button>
+              </>
+            )}
           </div>
         </nav>
       </header>
@@ -33,7 +58,9 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-in fade-in duration-700">
           <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-accent/50 backdrop-blur-sm border border-border">
             <Star className="h-4 w-4 text-primary fill-primary" />
-            <span className="text-sm font-medium">Mais que torcedor. Sócio Cruzeiro.</span>
+            <span className="text-sm font-medium">
+              Mais que torcedor. Sócio Cruzeiro.
+            </span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
@@ -44,21 +71,20 @@ const Index = () => {
           </h1>
 
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Faça parte da maior nação do futebol mineiro. Acesso exclusivo a jogos, 
-            descontos especiais e muito mais. Junte-se aos milhões de cruzeirenses!
+            Faça parte da maior nação do futebol mineiro. Acesso exclusivo a
+            jogos, descontos especiais e muito mais. Junte-se aos milhões de
+            cruzeirenses!
           </p>
 
           <div className="flex items-center justify-center space-x-4 pt-4">
             <Button size="lg" asChild className="gap-2">
-              <Link to="/signup">
+              <Link to={ROUTES.REGISTER}>
                 <Heart className="h-5 w-5" />
                 Quero ser sócio
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link to="/login">
-                Já sou sócio
-              </Link>
+              <Link to={ROUTES.LOGIN}>Já sou sócio</Link>
             </Button>
           </div>
 
@@ -102,9 +128,13 @@ const Index = () => {
         <div className="text-center space-y-2">
           <div className="flex items-center justify-center space-x-2">
             <Star className="h-5 w-5 text-primary fill-primary" />
-            <span className="font-semibold text-primary">Cruzeiro Esporte Clube</span>
+            <span className="font-semibold text-primary">
+              Cruzeiro Esporte Clube
+            </span>
           </div>
-          <p className="text-sm text-muted-foreground">© 2025 Sócio Torcedor Cruzeiro. Todos os direitos reservados.</p>
+          <p className="text-sm text-muted-foreground">
+            © 2025 Sócio Torcedor Cruzeiro. Todos os direitos reservados.
+          </p>
         </div>
       </footer>
     </div>

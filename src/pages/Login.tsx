@@ -128,7 +128,7 @@ const Login = () => {
                     Senha
                   </Label>
                   <Link
-                    to="/forgot-password"
+                    to="/esqueci-senha"
                     className="text-sm text-primary hover:underline font-medium"
                   >
                     Esqueceu a senha?

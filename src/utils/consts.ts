@@ -7,9 +7,12 @@ export const ROUTES = {
   PROFILE: "/perfil",
   EVENTS: "/eventos",
   BENEFITS: "/beneficios",
+  FORGOT_PASSWORD: "/esqueci-senha",
 };
 
 const API_BASE_URL = "http://localhost:3000/api";
 
 export const API_REGISTER = `${API_BASE_URL}/register`;
 export const API_LOGIN = `${API_BASE_URL}/login`;
+export const SEND_EMAIL_RECOVER_PASSWORD = `${API_BASE_URL}/recover-password`;
+export const RECOVER_PASSWORD = `${API_BASE_URL}/reset-password`;

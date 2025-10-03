@@ -14,6 +14,14 @@ export type AuthState = {
   logout: () => void;
   register: (name: string, email: string, password: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
+  sendEmailRecoverPassword: (
+    email: string
+  ) => Promise<{ message: string; success: boolean }>;
+  passwordRecover: (
+    code: string,
+    email: string,
+    password: string
+  ) => Promise<{ message: string; success: boolean }>;
 };
 
 export type FormDataRegister = {

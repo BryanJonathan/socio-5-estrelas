@@ -4,6 +4,9 @@ export const ROUTES = {
   REGISTER: "/register",
   NOTFOUND: "*",
   PANEL: "/painel",
+  PROFILE: "/perfil",
+  EVENTS: "/eventos",
+  BENEFITS: "/beneficios",
 };
 
 const API_BASE_URL = "http://localhost:3000/api";

@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Star, Mail, Lock } from "lucide-react";
+import { Star, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { ROUTES } from "@/utils/consts";
 import { useAuthStore } from "@/stores/authStore";
 import { isTokenValid } from "@/utils/tokenUtils";
@@ -44,13 +44,13 @@ const Login = () => {
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const token = useAuthStore((state) => state.token);
   const logout = useAuthStore((state) => state.logout);
 
   if (token) {
     const isValidToken = isTokenValid(token);
-    console.log(isValidToken);
     if (isValidToken) {
       return <Navigate to={ROUTES.PANEL} replace />;
     } else {
@@ -62,7 +62,7 @@ const Login = () => {
     setIsLoading(true);
     try {
       await login(data.email, data.password);
-      navigate("/");
+      navigate(ROUTES.PANEL);
     } catch (error) {
       console.error("Login error:", error);
     } finally {
@@ -105,7 +105,7 @@ const Login = () => {
                   Email
                 </Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5" />
                   <Input
                     id="email"
                     type="email"
@@ -135,14 +135,25 @@ const Login = () => {
                   </Link>
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5" />
                   <Input
                     id="password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
-                    className="pl-10"
+                    className="pl-10 pr-10"
                     {...register("password")}
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5" />
+                    ) : (
+                      <Eye className="h-5 w-5" />
+                    )}
+                  </button>
                 </div>
                 {errors.password && (
                   <p className="text-sm text-destructive">

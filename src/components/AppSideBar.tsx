@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -25,47 +24,48 @@ import {
   Gift,
   Calendar,
   Star,
-  Settings,
   LogOut,
 } from "lucide-react";
 import { ROUTES } from "@/utils/consts";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuthStore } from "@/stores/authStore";
 
 const sidebarItems = [
   {
     title: "Início",
-    url: ROUTES.HOME,
+    url: ROUTES.PANEL,
     icon: Home,
   },
   {
     title: "Meu Perfil",
-    url: ROUTES.HOME,
+    url: ROUTES.PROFILE,
     icon: User2,
   },
   {
     title: "Benefícios",
-    url: ROUTES.HOME,
+    url: ROUTES.BENEFITS,
     icon: Gift,
   },
   {
     title: "Eventos",
-    url: ROUTES.HOME,
+    url: ROUTES.EVENTS,
     icon: Calendar,
   },
-  {
-    title: "Configurações",
-    url: ROUTES.HOME,
-    icon: Settings,
-  },
+  // {
+  //   title: "Configurações",
+  //   url: ROUTES.HOME,
+  //   icon: Settings,
+  // },
 ];
 
 export function AppSidebar() {
   const { state } = useSidebar();
-  const location = useLocation();
-  const currentPath = location.pathname;
-
-  const isActive = (path: string) => currentPath === path;
+  const logout = useAuthStore((state) => state.logout);
   const isCollapsed = state === "collapsed";
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <Sidebar
@@ -131,11 +131,8 @@ export function AppSidebar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton className="hover:bg-sidebar-accent/50 transition-colors">
-                  <Avatar className="h-8 w-8">
+                  <Avatar className="h-6 w-6">
                     <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" />
-                    <AvatarFallback className="bg-primary text-primary-foreground text-xs">
-                      JD
-                    </AvatarFallback>
                   </Avatar>
                   {!isCollapsed && (
                     <>
@@ -155,15 +152,18 @@ export function AppSidebar() {
                 align="end"
                 className="w-56 bg-popover border border-border rounded-lg shadow-lg p-1"
               >
-                <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent cursor-pointer">
+                {/* <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent cursor-pointer">
                   <User2 className="h-4 w-4" />
                   <span>Minha Conta</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent cursor-pointer">
                   <Settings className="h-4 w-4" />
                   <span>Configurações</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-destructive/10 text-destructive cursor-pointer">
+                </DropdownMenuItem> */}
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-destructive/10 text-destructive cursor-pointer"
+                >
                   <LogOut className="h-4 w-4" />
                   <span>Sair</span>
                 </DropdownMenuItem>

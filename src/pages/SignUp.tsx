@@ -61,7 +61,6 @@ const SignUp = () => {
 
   if (token) {
     const isValidToken = isTokenValid(token);
-    console.log(isValidToken);
     if (isValidToken) {
       return <Navigate to={ROUTES.PANEL} replace />;
     } else {
@@ -220,7 +219,7 @@ const SignUp = () => {
                 <span className="w-full border-t border-border" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or</span>
+                <span className="bg-card px-2 text-muted-foreground">Ou</span>
               </div>
             </div>
 

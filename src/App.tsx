@@ -11,6 +11,9 @@ import Profile from "./pages/Profile";
 import { ROUTES } from "./utils/consts";
 import PrivateRoute from "./components/PrivateRoute";
 import PrivateLayout from "./components/PrivateLayout";
+import Panel from "./pages/Panel";
+import Events from "./pages/Events";
+import Benefits from "./pages/Benefits";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +33,10 @@ const App = () => (
           {/* PRIVADAS */}
           <Route element={<PrivateRoute />}>
             <Route element={<PrivateLayout />}>
-              <Route path={ROUTES.PANEL} element={<Profile />} />
+              <Route path={ROUTES.PANEL} element={<Panel />} />
+              <Route path={ROUTES.PROFILE} element={<Profile />} />
+              <Route path={ROUTES.EVENTS} element={<Events />} />
+              <Route path={ROUTES.BENEFITS} element={<Benefits />} />
             </Route>
           </Route>
         </Routes>

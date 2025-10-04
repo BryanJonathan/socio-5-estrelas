@@ -1,5 +1,3 @@
-import { Panel } from "react-resizable-panels";
-
 export const ROUTES = {
   HOME: "/",
   LOGIN: "/login",

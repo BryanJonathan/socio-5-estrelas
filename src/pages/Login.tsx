@@ -14,7 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Star, Mail, Lock, Eye, EyeOff } from "lucide-react";
-import { ROUTES } from "@/utils/consts";
+import { ROUTES, ROUTES_ADMIN } from "@/utils/consts";
 import { useAuthStore } from "@/stores/authStore";
 import { isTokenValid } from "@/utils/tokenUtils";
 
@@ -61,7 +61,13 @@ const Login = () => {
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
     try {
-      await login(data.email, data.password);
+      const role = await login(data.email, data.password);
+
+      if (role === "admin") {
+        navigate(ROUTES_ADMIN.PANEL);
+        return;
+      }
+
       navigate(ROUTES.PANEL);
     } catch (error) {
       console.error("Login error:", error);

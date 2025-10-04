@@ -1,3 +1,5 @@
+import { Panel } from "react-resizable-panels";
+
 export const ROUTES = {
   HOME: "/",
   LOGIN: "/login",
@@ -8,6 +10,11 @@ export const ROUTES = {
   EVENTS: "/eventos",
   BENEFITS: "/beneficios",
   FORGOT_PASSWORD: "/esqueci-senha",
+};
+
+export const ROUTES_ADMIN = {
+  LOGIN: "/admin/login",
+  PANEL: "/admin/painel",
 };
 
 const API_BASE_URL = "http://localhost:3000/api";

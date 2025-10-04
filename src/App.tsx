@@ -9,12 +9,15 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
-import { ROUTES } from "./utils/consts";
+import { ROUTES, ROUTES_ADMIN } from "./utils/consts";
 import PrivateRoute from "./components/PrivateRoute";
+import PrivateRouteAdmin from "./components/PrivateRouteAdmin";
 import PrivateLayout from "./components/PrivateLayout";
 import Panel from "./pages/Panel";
 import Events from "./pages/Events";
 import Benefits from "./pages/Benefits";
+import AdminPanel from "./pages/admin/Panel";
+import PrivateLayoutAdmin from "./components/PrivateLayoutAdmin";
 
 const queryClient = new QueryClient();
 
@@ -32,13 +35,20 @@ const App = () => (
           <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
           <Route path={ROUTES.NOTFOUND} element={<NotFound />} />
 
-          {/* PRIVADAS */}
+          {/* PRIVADAS USER */}
           <Route element={<PrivateRoute />}>
             <Route element={<PrivateLayout />}>
               <Route path={ROUTES.PANEL} element={<Panel />} />
               <Route path={ROUTES.PROFILE} element={<Profile />} />
               <Route path={ROUTES.EVENTS} element={<Events />} />
               <Route path={ROUTES.BENEFITS} element={<Benefits />} />
+            </Route>
+          </Route>
+
+          {/* PRIVADAS ADMIN */}
+          <Route element={<PrivateRouteAdmin />}>
+            <Route element={<PrivateLayoutAdmin />}>
+              <Route path={ROUTES_ADMIN.PANEL} element={<AdminPanel />} />
             </Route>
           </Route>
         </Routes>

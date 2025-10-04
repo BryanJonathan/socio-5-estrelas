@@ -4,6 +4,7 @@ export type User = {
   email: string;
   createdAt: Date;
   updatedAt: Date;
+  role: "admin" | "user";
 };
 
 export type AuthState = {
@@ -13,7 +14,7 @@ export type AuthState = {
   setUser: (user: User, token: string) => void;
   logout: () => void;
   register: (name: string, email: string, password: string) => Promise<void>;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<"user" | "admin">;
   sendEmailRecoverPassword: (
     email: string
   ) => Promise<{ message: string; success: boolean }>;

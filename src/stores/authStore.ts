@@ -56,6 +56,8 @@ export const useAuthStore = create<AuthState>()(
 
           const { user, token } = req.data.data;
           set({ user, token });
+
+          return user.role;
         } catch (error) {
           if (axios.isAxiosError(error)) {
             console.error(
